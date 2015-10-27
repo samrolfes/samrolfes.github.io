@@ -6,7 +6,7 @@
     <style>
       body {
         margin: 0px;
-        background-color: #000000;
+        background-color: #eae0d6;
         overflow: hidden;
       }
     </style>
@@ -331,7 +331,7 @@
         );
         scene.add( plane );
 
-        renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.sortObjects = false;

@@ -43,21 +43,21 @@
         },
         {
           path: 'GEO_Lips_2 (UV).OBJ',
-          texture_path: 'GEO_Lips_2 (UV).jpg'
+          texture_path: 'GEO_Lips_2 (UV).jpg'          
         },
         {
-          path: 'flyingparts1.OBJ',
-          texture_path: 'flyingparts1.BMP'
+          path: 'GEO_Nose_2 (UV).OBJ',
+          texture_path: 'GEO_Nose_2 (UV).jpg'
         },
         {
-          path: 'mouth1.OBJ',
-          texture_path: 'mouth1.jpeg'
+          path: 'GEO_Torso_1 (UV.OBJ',
+          texture_path: 'GEO_Torso_1 (UV.jpg'  
         }
       ];
 
       //set to `false` or comment out in production, so nothing logs to console
       var DEBUG = false;
-      var debug = DEBUG ? console.log : function(){};
+      var debug = DEBUG ? console.log : function(){}; 
 
       var container;
       var objects = [];
@@ -85,7 +85,7 @@
         document.body.appendChild( container );
 
         camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z =10;
+        camera.position.z = 60;
         // camera.position.z = 150;
 
 
@@ -107,42 +107,8 @@
         scene = new THREE.Scene();
 
         // var ambient = new THREE.AmbientLight( 0x101030 );
-        //var ambient = new THREE.AmbientLight( 0xffffff );
-        //scene.add( ambient );
-
-        var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-        directionalLight.position.set( 15, 15, 15 );
-        scene.add( directionalLight );
-
-        hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
-				hemiLight.color.setHSL( 0.6, 1, 0.6 );
-				hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
-				hemiLight.position.set( 0, 500, 0 );
-				scene.add( hemiLight );
-
-				//
-
-				dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
-				dirLight.color.setHSL( 0.1, 1, 0.95 );
-				dirLight.position.set( 30, 20, 1 );
-				dirLight.position.multiplyScalar( 50 );
-				scene.add( dirLight );
-
-				dirLight.castShadow = true;
-
-				dirLight.shadowMapWidth = 2048;
-				dirLight.shadowMapHeight = 2048;
-
-				var d = 50;
-
-				dirLight.shadowCameraLeft = -d;
-				dirLight.shadowCameraRight = d;
-				dirLight.shadowCameraTop = d;
-				dirLight.shadowCameraBottom = -d;
-
-				dirLight.shadowCameraFar = 3500;
-				dirLight.shadowBias = -0.0001;
-				//dirLight.shadowCameraVisible = true;
+        var ambient = new THREE.AmbientLight( 0xffffff );
+        scene.add( ambient );
 
         var manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
@@ -175,19 +141,11 @@
             var texture = new THREE.Texture();
             texture.image = image;
             texture.needsUpdate = true;
-            object.traverse( function ( child ) {
-
-
-
-  							console.log(child.material);
-                              //var m = child.material;
-                              //console.log('1', JSON.stringify(m));
-                              child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } )
-                              //child.material.map = texture;
-                           //child.material.normalMap = normal;
-
-
-    });
+            object.traverse( function(child) {
+              if ( child instanceof THREE.Mesh ) {
+                child.material.map = texture;
+              }
+            });
             cb(object);
           }, onProgress, onError );
         }
@@ -233,10 +191,9 @@
         for (var i=0; i < STOCK_OBJECTS.length; i++) {
           loadObj(STOCK_OBJECTS[i], function(object){
             // render at least the stock objects, with the boxhelper
-            randomizeObject(object, false);
+            randomizeObject(object, true);
             debug('object is', object);
             scene.add( object );
-            object.receiveShadow = true;
             objects.push(object.children[0]);
 
             for (var j=0; j<CLONED_OBJECT_COUNT; j++){
@@ -244,86 +201,11 @@
               var cloned_o = object.clone();
               randomizeObject(cloned_o);
               scene.add( cloned_o );
-              cloned_o.receiveShadow = true;
               objects.push(cloned_o.children[0]);
 
             }
           });
         };
-
-        //Teengirl obj texture
-
-                var manager = new THREE.LoadingManager();
-    			manager.onProgress = function ( item, loaded, total ) {
-
-					console.log( item, loaded, total );
-
-				};
-
-
-
-                //
-
-
-				var texture = new THREE.Texture();
-
-				var onProgress = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				};
-
-				var onError = function ( xhr ) {
-				};
-
-
-
-
-
-
-
-
-
-        // EXTRA STATIC MESH
-
-				var loader = new THREE.OBJLoader( manager );
-				loader.load( 'obj/flyingparts1.OBJ', function ( object ) {
-        var loader = new THREE.ImageLoader( manager );
-        loader.load( 'textures/flyingparts1.BMP', function ( image ) {
-
-          texture.image = image;
-          texture.needsUpdate = true;
-
-        } );
-
-					object.traverse( function ( child ) {
-
-
-
-							console.log(child.material);
-                            //var m = child.material;
-                            //console.log('1', JSON.stringify(m));
-                            child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } )
-                            //child.material.map = texture;
-                         //child.material.normalMap = normal;
-
-
-  });
-
-					object.position.y = 5;
-                    object.scale.set(1,1,1)
-                    object.rotation.y = -40
-					scene.add( object );
-
-				}, onProgress, onError );
-
-
-
-
-
-
-
 
         plane = new THREE.Mesh(
           new THREE.PlaneBufferGeometry( 2000, 2000, 8, 8 ),
@@ -397,7 +279,7 @@
         if ( intersects.length > 0 ) {
           if ( INTERSECTED != intersects[ 0 ].object ) {
             if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-
+            
             INTERSECTED = intersects[ 0 ].object;
             INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
 
@@ -422,7 +304,7 @@
       function onDocumentTouchStart(event) {
 
         event.preventDefault();
-
+      
         mouse = getMouseOnScreen(event.touches[0].pageX, event.touches[0].pageY)
         raycaster.setFromCamera( mouse, camera );
         var intersects = raycaster.intersectObjects( objects );
@@ -454,7 +336,7 @@
         if ( intersects.length > 0 ) {
           if ( INTERSECTED != intersects[ 0 ].object ) {
             if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-
+            
             INTERSECTED = intersects[ 0 ].object;
             INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
 
@@ -535,7 +417,7 @@
               objects[i].rotation.y = Math.cos( time ) / 8;
               // fun with scale
               if (SCALE_OBJECTS_OVER_TIME) {
-                objects[i].scale.x = objects[i].scale.y = objects[i].scale.z = ((Math.cos( time ) *2 ) + 2);
+                objects[i].scale.x = objects[i].scale.y = objects[i].scale.z = ((Math.cos( time ) *2 ) + 2);                              
               };
             };
           }

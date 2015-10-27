@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://jointhestudio.com/mom/quick/quick/goagain.html -->
+<html lang="en"><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Draggable Body Elements</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"3998eb4d7b884f06623805702ff34d49",petok:"930e195107c608e9f48327a81e777c06608a260f-1445763337-86400",zone:"jointhestudio.com",rocket:"a",apps:{}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=b0bfc08c34/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="./Draggable Body Elements (go again)_files/cloudflare.min.js"></script><style type="text/css"></style><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_7ad92b6126" onload="CloudFlare.__cfjs_block_7ad92b6126_load()" onerror="CloudFlare.__cfjs_block_7ad92b6126_error()" onreadystatechange="CloudFlare.__cfjs_block_7ad92b6126_readystatechange()" type="text/javascript" src="./Draggable Body Elements (go again)_files/rocket.js"></script>
+<style>body{font-family:Monospace;background-color:#f0f0f0;margin:0px;overflow:hidden;}</style>
+</head>
+<body>
+ 
+<script data-rocketsrc="three.min.js" type="text/rocketscript" data-rocketoptimized="true"></script><script type="text/javascript" src="./Draggable Body Elements (go again)_files/three.min.js"></script>
+<script data-rocketsrc="TrackballControls.js" type="text/rocketscript" data-rocketoptimized="true"></script><script type="text/javascript" src="./Draggable Body Elements (go again)_files/TrackballControls.js"></script>
+<script data-rocketsrc="http://threejs.org/examples/js/loaders/OBJLoader.js" type="text/rocketscript" data-rocketoptimized="true"></script><script type="text/javascript" src="./Draggable Body Elements (go again)_files/OBJLoader.js"></script>
+<script data-rocketsrc="BuildBody.js" type="text/rocketscript" data-rocketoptimized="true"></script><script type="text/javascript" src="./Draggable Body Elements (go again)_files/BuildBody.js"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+// init various parts of scene: container, camera, controls, scene, render engine, objects, raycaster (new) and mouse (new)
+		var container, stats;
+		var camera, controls, scene, renderer;
+		var objects = [], plane;
+		var raycaster = new THREE.Raycaster();
+		var mouse = new THREE.Vector2(),
+		offset = new THREE.Vector3(),
+		INTERSECTED, SELECTED;
+//starting the 'car'; of the page.  turn it on and make it go
+		init();
+		animate();
+
+// here is where we determine what 'init' is
+		function init() {
+ 		 container = document.createElement( 'div' );
+		 document.body.appendChild( container );
+
+				// take the inited scene, make it a scene object
+				scene = new THREE.Scene();
+/** original camera settings
+// take the inited camera and define it is a camera object and set some configs
+// Prepare perspective camera
+var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+
+    var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 100, FAR = 5000;
+    this.camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+		this.scene.add(this.camera);
+	  this.camera.position.set(100, 100, 100);
+end of original camera settings **/
+// camera new
+camera = new THREE.PerspectiveCamera(
+			 35,         // Field of view
+			 800 / 640,  // Aspect ratio
+			 .1,         // Near
+			 10000       // Far
+	 );
+scene.add(camera);
+	 camera.position.set( -15, 10, 15 );
+	 camera.lookAt( scene.position );
+// end camera new
+
+
+
+		// take the inited controls variable and define as a trackballcontrols object.
+						controls = new THREE.TrackballControls( camera );
+						controls.rotateSpeed = 1.0;
+						controls.zoomSpeed = 1.2;
+						controls.panSpeed = 0.8;
+						controls.noZoom = false;
+						controls.noPan = false;
+						controls.staticMoving = true;
+						controls.dynamicDampingFactor = 0.3;
+
+// in your new scene,add a new general light
+ 	 this.scene.add( new THREE.AmbientLight( 0x505050 ) );
+// create a new variable called light.  make it a spotlight object, set its attributes
+		var light = new THREE.SpotLight( 0xffffff, 1.5 );
+		light.position.set( 0, 500, 2000 );
+		light.castShadow = true;
+		light.shadowCameraNear = 200;
+		light.shadowCameraFar = camera.far;
+		light.shadowCameraFov = 50;
+		light.shadowBias = -0.00022;
+		light.shadowDarkness = 0.5;
+		light.shadowMapWidth = 2048;
+		light.shadowMapHeight = 2048;
+// put the spotlight into your scene
+		scene.add( light );
+
+		var dirLight = new THREE.DirectionalLight(0xffffff);
+	 dirLight.position.set(200, 200, 1000).normalize();
+	 camera.add(dirLight);
+	 camera.add(dirLight.target);
+
+	buildtorso();
+	buildlips();
+	buildleg();
+
+ 	plane = new THREE.Mesh(
+	new THREE.PlaneBufferGeometry( 2000, 2000, 8, 8 ),
+	new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true } )
+	);
+	plane.visible = false;
+	scene.add( plane );
+	camera.lookAt( plane );
+// need a rendering engine - right?  create it .  notice that you add the renderer to the container div, not the scene
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setClearColor( 0xf0f0f0 );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.sortObjects = false;
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapType = THREE.PCFShadowMap;
+ 	container.appendChild( renderer.domElement );
+// back to the renderer - adding a listener for mouse movements.  very cool
+	renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
+// now you add another listener to when the window resizes - cool again
+	window.addEventListener( 'resize', onWindowResize, false );
+}
+
+	function onWindowResize() {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+	}
+
+	function onDocumentMouseMove( event ) {
+// The event.preventDefault() method stops the default action of an element from happening.
+
+		event.preventDefault();
+	  mouse.x =   ( event.clientX / window.innerWidth  ) * 2 - 1;
+		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+ 		raycaster.setFromCamera( mouse, camera );
+
+		if ( SELECTED ) {
+
+//got this online
+var intersects = raycaster.intersectObject( plane );
+			SELECTED.position.copy( intersects[ 0 ].point );
+//end of online help
+
+console.log('moved object id is ' + SELECTED.id);
+console.log('after moving, x of selected is ' + SELECTED.position.x);
+console.log('after moving, y is  ' + SELECTED.position.y);
+console.log('after moving - z ' + SELECTED.position.z);
+
+					return;
+				}
+				var intersects = raycaster.intersectObjects( objects, true );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+						INTERSECTED = intersects[ 0 ].object;
+						plane.position.copy( INTERSECTED.position );
+						plane.lookAt( camera.position );
+					}
+					container.style.cursor = 'pointer';
+				} else {
+					if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+					INTERSECTED = null;
+					container.style.cursor = 'auto';
+				}
+			}
+
+			function onDocumentMouseDown( event ) {
+
+// fresh code
+event.preventDefault();
+var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 ).unproject( camera );
+var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+var intersects = raycaster.intersectObjects( objects, true );
+if ( intersects.length > 0 ) {
+	controls.enabled = false;
+	SELECTED = intersects[ 0 ].object;
+	var intersects = raycaster.intersectObject( plane );
+	offset.copy( intersects[ 0 ].point ).sub( plane.position );
+	container.style.cursor = 'move';
+}
+
+
+// end of fresh code
+
+/** old code
+				event.preventDefault();
+				var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 ).unproject( camera );
+				var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+				var intersects = raycaster.intersectObjects( objects, true );
+console.log('mousedown');
+				if ( intersects.length > 0 ) {
+					controls.enabled = false;
+					   if ( SELECTED === undefined )
+						 	{SELECTED = new THREE.Object3D();
+									console.log('selected was undefined');
+							}
+					SELECTED = intersects[ 0 ].object;
+
+    console.log('selected id is ' + SELECTED.id);
+    console.log('selected x position is: ' + SELECTED.position.x);
+		console.log('selected y position is: ' + SELECTED.position.y);
+		console.log('selected z position is: ' + SELECTED.position.z);
+    //console.log(scene.children);//
+
+					var intersects = raycaster.intersectObject( plane );
+	console.log('intersects is this big: ' + intersects.length);
+					offset.copy( intersects[ 0 ].point ).sub( plane.position );
+		console.log('offset x is ' + offset.x);
+		console.log( 'plane x is ' + plane.position.x);
+		console.log( 'plane y is ' + plane.position.y);
+		console.log( 'plane z is ' + plane.position.z);
+
+					container.style.cursor = 'move';
+				}
+				**/
+			}
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				controls.enabled = true;
+				if ( INTERSECTED ) {
+					plane.position.copy( INTERSECTED.position );
+					SELECTED = null;
+				}
+				container.style.cursor = 'auto';
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+				//stats.update();
+			}
+
+			function render() {
+				controls.update();
+				renderer.render( scene, camera );
+			}
+
+		</script>
+
+
+<div style="cursor: auto;"><canvas width="775" height="602" style="width: 775px; height: 602px;"></canvas></div></body></html>

@@ -447,6 +447,15 @@ any: function() { return (isMobile.Android() || isMobile.BlackBerry() || isMobil
         renderer.sortObjects = false;
         renderer.shadowMap.enabled = false;
 				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        if(isMobile){
+          renderer.autoClearColor = true;
+
+        } else
+        {
+          renderer.autoClearColor = true;
+
+      };
         renderer.autoClearColor = false;
 
         container.appendChild( renderer.domElement );

@@ -194,7 +194,7 @@
                               //console.log('1', JSON.stringify(m));
                               child.geometry.computeVertexNormals();
                               child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
-                              child.material.map = videoTexture.texture;
+                              child.material.map = texture;
                               child.castShadow = true;
                               child.receiveShadow = true;
 
@@ -331,7 +331,7 @@
                           //console.log('1', JSON.stringify(m));
                           child.geometry.computeVertexNormals();
                           child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
-                          child.material.map = videoTexture.texture;
+                          child.material.map = texture;
                           child.castShadow = true;
                           child.receiveShadow = true;
 

@@ -398,6 +398,7 @@ button.ui-button::-moz-focus-inner {
 	left: 0;
 	padding: .2em;
 	outline: 0;
+	width: 30%
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em 1em;
@@ -414,8 +415,8 @@ button.ui-button::-moz-focus-inner {
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
 	right: .3em;
-	top: 50%;
-	width: 21px;
+	top: 75%;
+	width: 40px;
 	margin: -10px 0 0 0;
 	padding: 1px;
 	height: 20px;

@@ -355,7 +355,7 @@
         );
         scene.add( plane );
 
-        renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: false });
+        renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: true });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.sortObjects = false;

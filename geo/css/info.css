@@ -39,4 +39,5 @@
 {
 	opacity: 1;
 	max-height:40vw !important;
+  max-width: 30vw !important;
 }

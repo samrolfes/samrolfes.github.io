@@ -38,7 +38,7 @@
 
       // how many objects in the scene can be set here
       // the total is always ∑(STOCK_OBJECTS.length + CLONED_OBJECT_COUNT)
-      var CLONED_OBJECT_COUNT=4;
+      var CLONED_OBJECT_COUNT=3;
 
       var STOCK_OBJECTS = [
         {
@@ -188,7 +188,7 @@
                               //console.log('1', JSON.stringify(m));
                               child.geometry.computeVertexNormals();
                               child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
-                              child.material.map = texture;
+                              child.material.map = videoTexture.texture;
                               child.castShadow = false;
                               child.receiveShadow = false;
 
@@ -325,7 +325,7 @@
                           //console.log('1', JSON.stringify(m));
                           child.geometry.computeVertexNormals();
                           child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
-                          child.material.map = texture;
+                          child.material.map = videoTexture.texture;
                           child.castShadow = false;
                           child.receiveShadow = false;
 
@@ -355,13 +355,13 @@
         );
         scene.add( plane );
 
-        renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: true });
+        renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: false });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.sortObjects = false;
         renderer.shadowMap.enabled = false;
 				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.autoClearColor = false;
+        renderer.autoClearColor = true;
 
         container.appendChild( renderer.domElement );
 

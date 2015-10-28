@@ -7,7 +7,7 @@
       body {
         margin: 0px;
         background-color: #eae0d6;
-        background-image: url("textures/love14.510.jpg");
+        background-image: url("textures/lovebg631.jpg");
         background-repeat: repeat;
         overflow: hidden;
       }
@@ -15,9 +15,11 @@
   </head>
   <body>
     <!--<img src= "textures/LOVEtype.png"-->
-    <button onclick='onVideoPlayButtonClick()'>play</button>
-	<button onclick='onVideoPauseButtonClick()'>pause</button>
-</div><body style='margin: 0px; overflow: hidden; text-align:center;'>
+    <!--3D, Design: <b>Sam Rolfes</b>     Sounds, Direction:  <b>GEO</b>     Coding: <b>Joseph Yølk Chiocchi, Linda Rolfes, Sam Rolfes </b> -->
+    <button onclick="onVideoPlayButtonClick()">play</button>
+    <button onclick="onClear()">clear</button>
+
+<body style='margin: 0px; overflow: hidden; text-align:center;'>
 
 
     <script src="js/three.js"></script>
@@ -26,6 +28,114 @@
     <script src="js/loaders/OBJLoader.js"></script>
     <script src="js/TrackballControls.js"></script>
     <script src="js/threex.videotexture.js"></script>
+
+    <!-- Code to display an information button and box when clicked. -->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel=stylesheet href="css/jquery-ui.css" />
+<link rel=stylesheet href="css/info.css"/>
+<script src="js/info.js"></script>
+<div id="infoButton"></div>
+<script>
+$(function() {
+  $( "#dialog-message" ).dialog({
+    modal: true,
+    buttons: {
+      cool: function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+});
+</script>
+<div id="infoBox" title="LOVE">
+  <p>
+    Sounds, Direction: <br> <b>GEO</b> <br>
+    <br>
+
+    3D, Design: <br> <b>Sam Rolfes</b> <br>
+    <br>
+    Coding: <br> <b>Joseph Yølk Chiocchi, Linda Rolfes, Sam Rolfes </b>
+    </p>
+    <p>
+      <i><b>Download Collage Pieces: </b><br>
+        <a href="collage_pieces/ROLFES-LOVE1.png"> 1</a>
+        <a href="collage_pieces/ROLFES-LOVE2.png"> 2</a>
+        <a href="collage_pieces/ROLFES-LOVE3.png"> 3</a>
+        <a href="collage_pieces/ROLFES-LOVE4.png"> 4</a>
+        <a href="collage_pieces/ROLFES-LOVE5.png"> 5</a>
+        <a href="collage_pieces/ROLFES-LOVE6.png"> 6</a>
+        <a href="collage_pieces/ROLFES-LOVE7.png"> 7</a>
+        <a href="collage_pieces/ROLFES-LOVE8.png"> 8</a>
+        <a href="collage_pieces/ROLFES-LOVE9.png"> 9</a>
+        <a href="collage_pieces/ROLFES-LOVE10.png"> 10</a>
+        <a href="collage_pieces/ROLFES-LOVE11.png"> 11</a>
+        <a href="collage_pieces/ROLFES-LOVE12.png"> 12</a>
+        <a href="collage_pieces/ROLFES-LOVE13.png"> 13</a>
+        <a href="collage_pieces/ROLFES-LOVE14.png"> 14</a>
+        <a href="collage_pieces/ROLFES-LOVE15.png"> 15</a>
+      </i></p>
+
+
+
+
+  </div>
+<!--   -->
+
+
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        cool: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+
+<div id="dialog-message" title="LOVE">
+  <p>
+    3D, Design: <br> <b>Sam Rolfes</b> <br>
+    <br>
+    Sounds, Direction: <br> <b>GEO</b> <br>
+    <br>
+    Coding: <br> <b>Joseph Yølk Chiocchi, Linda Rolfes, Sam Rolfes </b>
+    </p>
+    <p>
+      <i><b>Download Collage Pieces: </b><br>
+        <a href="freebeez/ROLFES-LOVE1.png"> 1</a>
+        <a href="freebeez/ROLFES-LOVE2.png"> 2</a>
+        <a href="freebeez/ROLFES-LOVE3.png"> 3</a>
+        <a href="freebeez/ROLFES-LOVE4.png"> 4</a>
+        <a href="freebeez/ROLFES-LOVE5.png"> 5</a>
+        <a href="freebeez/ROLFES-LOVE6.png"> 6</a>
+        <a href="freebeez/ROLFES-LOVE7.png"> 7</a>
+        <a href="freebeez/ROLFES-LOVE8.png"> 8</a>
+        <a href="freebeez/ROLFES-LOVE9.png"> 9</a>
+        <a href="freebeez/ROLFES-LOVE10.png"> 10</a>
+        <a href="freebeez/ROLFES-LOVE11.png"> 11</a>
+        <a href="freebeez/ROLFES-LOVE12.png"> 12</a>
+        <a href="freebeez/ROLFES-LOVE13.png"> 13</a>
+        <a href="freebeez/ROLFES-LOVE14.png"> 14</a>
+        <a href="freebeez/ROLFES-LOVE15.png"> 15</a>
+      </i></p>
+
+
+
+
+  </div>
+-->
+
+
 
 
 
@@ -58,11 +168,11 @@
           texture_path: 'pink.jpg',
         },
         {
-          path: 'GEO_Lips_2 (UV).OBJ',
+          path: 'thehand_decimated.OBJ',
           texture_path: 'pink.jpg'
         },
         {
-          path: 'flyingparts1.OBJ',
+          path: 'flyingparts3.OBJ',
           texture_path: 'pink.jpg'
         },
         {
@@ -118,8 +228,8 @@
         container = document.createElement( 'div' );
         document.body.appendChild( container );
 
-        camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z =10;
+        camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 7;
         // camera.position.z = 150;
 
 
@@ -343,12 +453,20 @@
 
 });
 
-					object.position.y = 0;
+					object.position.y = .6;
                     object.scale.set(1.5,1.5,1.5)
                     object.rotation.y = 0
 					scene.add( object );
 
 				}, onProgress, onError );
+
+        var isMobile = {
+Android: function() { return navigator.userAgent.match(/Android/i); },
+BlackBerry: function() { return navigator.userAgent.match(/BlackBerry/i); },
+iOS: function() { return navigator.userAgent.match(/iPhone|iPad|iPod/i); },
+Opera: function() { return navigator.userAgent.match(/Opera Mini/i); },
+Windows: function() { return navigator.userAgent.match(/IEMobile/i); },
+any: function() { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
 
 
 
@@ -368,7 +486,13 @@
         );
         scene.add( plane );
 
-        renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: true });
+        if(isMobile){
+        renderer = (new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: true }))
+        } else
+        {
+        renderer = (new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: false }))
+      };
+
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.sortObjects = false;
@@ -392,12 +516,13 @@
       }
 
 
-              function onVideoPlayButtonClick(){
-      		video.play()
-      	}
-      	function onVideoPauseButtonClick(){
-      		video.pause()
-      	}
+      function onVideoPlayButtonClick() {
+renderer.clearTarget ();
+}
+function onClear() {
+renderer.clearTarget ();
+}
+
 
 
       function onWindowResize() {
@@ -582,8 +707,8 @@
         if (ROTATE_OBJECTS_OVER_TIME) {
           for (i=0; i<objects.length; i++ ) {
             if (objects[i] !== INTERSECTED){
-              objects[i].rotation.x = Math.sin( time ) / 8;
-              objects[i].rotation.y = Math.cos( time ) / 4;
+              objects[i].rotation.x = Math.sin( time ) / 10;
+              objects[i].rotation.y = Math.cos( time ) / 6;
               // fun with scale
               if (SCALE_OBJECTS_OVER_TIME) {
                 objects[i].scale.x = objects[i].scale.y = objects[i].scale.z = ((Math.cos( time ) *2 ) + 2);

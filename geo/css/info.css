@@ -2,7 +2,7 @@
 
 .ui-widget-content
 {
-    font-size:12px;
+    font-size: 3vh;
     font-family: courier;
 }
 
@@ -38,5 +38,5 @@
 .ui-dialog
 {
 	opacity: 1;
-	width:200px !important;
+	max-height:70vw !important;
 }

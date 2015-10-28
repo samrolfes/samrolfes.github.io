@@ -142,14 +142,8 @@
        light.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
 
        light.position.set( 0, 500, 2000 );
-       /*light.castShadow = true;
+       light.castShadow = false;
 
-
-
-       light.shadowBias = -0.00022;
-
-       light.shadowMapWidth = 2048;
-       light.shadowMapHeight = 2048; */
 
        scene.add( light );
 
@@ -195,8 +189,8 @@
                               child.geometry.computeVertexNormals();
                               child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
                               child.material.map = texture;
-                              //child.castShadow = true;
-                              //child.receiveShadow = true;
+                              child.castShadow = false;
+                              child.receiveShadow = false;
 
                            //child.material.normalMap = normal;
                          }
@@ -250,9 +244,9 @@
             // render at least the stock objects, with the boxhelper
             randomizeObject(object, false);
             debug('object is', object);
-            //object.castShadow = true;
+            object.castShadow = false;
             scene.add( object );
-            o//bject.receiveShadow = true;
+            object.receiveShadow = false;
             objects.push(object.children[0]);
 
             for (var j=0; j<CLONED_OBJECT_COUNT; j++){
@@ -260,8 +254,8 @@
               var cloned_o = object.clone();
               randomizeObject(cloned_o);
               scene.add( cloned_o );
-              //cloned_o.receiveShadow = true;
-              //cloned_o.castShadow = true;
+              cloned_o.receiveShadow = false;
+              cloned_o.castShadow = false;
               objects.push(cloned_o.children[0]);
 
             }
@@ -332,8 +326,8 @@
                           child.geometry.computeVertexNormals();
                           child.material = new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0xFFFFFF, shininess: 10, shading: THREE.SmoothShading } )
                           child.material.map = texture;
-                          //child.castShadow = true;
-                          //child.receiveShadow = true;
+                          child.castShadow = false;
+                          child.receiveShadow = false;
 
                        child.material.normalMap = mapHeight;
                      }
@@ -365,8 +359,8 @@
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.sortObjects = false;
-        //renderer.shadowMap.enabled = true;
-				//renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.enabled = false;
+				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.autoClearColor = false;
 
         container.appendChild( renderer.domElement );
